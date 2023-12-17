@@ -57,8 +57,10 @@ class ChangeController extends Controller
     public function change_album($id)
     {
         $record_info = DB::table('album')->where('id',$id)->first();
-
-        return view('change_album',['record_info'=>$record_info , 'id' => $id]);
+if(auth()->check()) {
+    return view('change_album', ['record_info' => $record_info, 'id' => $id]);
+}
+else return redirect(url()->previous());
     }
 
     public function DeleteAlbum(Request $request)

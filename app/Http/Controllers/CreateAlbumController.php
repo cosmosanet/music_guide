@@ -13,7 +13,10 @@ class CreateAlbumController extends Controller
     //
     public function create_album()
     {
-        return view('create_album');
+        if(auth()->check()) {
+            return view('create_album');
+        }
+        else return redirect(url()->previous());
     }
 
     public function Addalbum(Request $request)
